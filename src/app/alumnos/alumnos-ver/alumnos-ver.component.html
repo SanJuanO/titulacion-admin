@@ -1,0 +1,93 @@
+<app-menu></app-menu>
+
+
+<div class="container" style="font-family:Helvetica;">
+  <br>
+  <br>
+  <br>
+  <div class="modal" id="solicitaLiberacion" style=" display: block; ">
+    <div class="modal__content modal__content--xl p-10 text-center">
+      <a data-dismiss="modal" href="javascript:;" class="absolute right-0 top-0 mt-3 mr-3"> <i data-feather="x" class="w-8 h-8 text-gray-500"></i> </a>
+
+      <div class="text-3xl mt-8 text-center" style="color: #FF8300; font-size: 28px;">Liberación de Servicio Social</div>
+      <div class="mt-8 text-red text-center" style="color: #6B3F23; font-size: 25px;">¡Completa!</div>
+
+
+      <!--<div class="mt-8" style="font-size: 20px;">
+        En esta sección podrás visualizar los requisitos que requieres para poder liberar tu servicio social.
+      </div>-->
+      <br>
+      <div class="flex justify-center text-center items-center mt-8 text-center" style="background: #FF8300; border-radius: 15px;font-weight: bold; width: 180px; margin: auto;
+        "> <br> <a data-dismiss="modal" style=" border-radius: 15px; font-size: 17px; cursor:pointer;" class="button  btn-lg text-white  ">Continuar</a> </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row items-center p-5 pb-1 border-b border-gray-200 dark:border-dark-5" style="font-size:25px;  font-weight: bold; ">
+    <h2 class="font-medium text-base mr-auto" style="font-size:25px;  font-weight: bold; ">
+      Información Personal
+    </h2>
+  </div>
+  <div class="container pl-5 pr-5">
+    <div class="grid grid-cols-12 gap-6">
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class=" p-5 pt-1 pb-1">
+          <div class="text-base text-gray-600 mt-1" style="font-size:19px; color:#FF8800; font-weight: bold;">
+            Nombre
+          </div>
+
+          <div class="text-base font-bold leading-8 mt-1"> {{alumno.nombre}} </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class=" p-5 pt-1 pb-1">
+          <div class="text-base text-gray-600 mt-1" style="font-size:19px; color:#FF8800; font-weight: bold;">Apellido Paterno</div>
+
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.paterno}}</div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class=" p-5 pt-1 pb-1">
+          <div class="text-base text-gray-600 mt-1" style="font-size:19px; color:#FF8800; font-weight: bold;">Apellido Materno</div>
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.materno}}</div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class="p-5 pt-1 pb-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">ID Matricula</label>
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.matricula}}</div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class="p-5 pt-1 pb-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Universidad:</label>
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.universidad}}</div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class="p-5 pt-1 pb-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Facultad:</label>
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.facultad}}</div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class="p-5 pt-1 pb-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Carrera:</label>
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.carrera}}</div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-4 intro-y">
+        <div class="p-5 pt-1 pb-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Plan:</label>
+          <div class="text-base font-bold leading-8 mt-1">{{alumno.nombre_plan}}</div>
+        </div>
+      </div>
+
+</div>
+</div>
+</div>

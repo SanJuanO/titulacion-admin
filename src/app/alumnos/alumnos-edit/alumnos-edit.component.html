@@ -1,0 +1,145 @@
+<app-menu>
+</app-menu>
+
+<!-- BEGIN: Content -->
+<div class="container" style="font-family:Helvetica;">
+  <br>
+  <br>
+  <br>
+
+  <div class="modal" id="success-modal-preview">
+    <div class="modal__content">
+      <div class="p-5 text-center">
+        <i data-feather="check-circle" class="w-16 h-16 text-theme-9 mx-auto mt-3"></i>
+        <div class="text-3xl mt-5">Muy bien!</div>
+        <div class="text-gray-600 mt-2">Has agregado un alumno!</div>
+      </div>
+      <div class="px-5 pb-8 text-center"> <button type="button" data-dismiss="modal" class="button w-24 bg-theme-1 text-white">Ok</button> </div>
+    </div>
+  </div>
+
+  <div class="modal" id="validacion">
+    <div class="modal__content">
+      <div class="p-5 text-center">
+        <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+        <div class="text-gray-600 mt-2">{{mensajevalidacion}}</div>
+      </div>
+      <div class="px-5 pb-8 text-center"> <button type="button" data-dismiss="modal" class="button w-24 bg-theme-1 text-white">Ok</button> </div>
+    </div>
+  </div>
+
+  <form #formAlumno="ngForm" (ngSubmit)="onSubmit(formAlumno)">
+
+    <div class=" flex-col sm:flex-row items-center p-5 " style="font-size:25px;  font-weight: bold; color: #FF8300;">
+      <h2 class="font-medium text-center" style="font-size:25px;  font-weight: bold; color: #FF8300;">
+        Editar Alumno
+      </h2>
+    </div>
+    <!-- BEGIN: FORM  box p-5 mt-5 w-full -->
+
+    <div class="intro-y ">
+      <div class="flex flex-col sm:flex-rfow p-5 border-b border-gray-200 dark:border-dark-5" style="font-size:25px;  font-weight: bold; ">
+        <h2 class="font-medium text-base mr-auto" style="font-size:25px;  font-weight: bold; ">
+          Información Personal
+        </h2>
+      </div>
+
+      <div class="p-5" id="horizontal-form">
+        <div class="preview">
+
+
+          <div class="flex flex-col sm:flex-row items-center mt-3" style="display: none">
+            <label style="font-size:19px; color:#FF8800; font-weight: bold;" class="sm:w-32 sm:text-right sm:mr-5">Activo:</label>
+            <input type="radio" ng-value="true" name="activo" [(ngModel)]="activo" [checked]="true" />
+          </div>
+
+
+          <div class="mt-3">
+            <div class="sm:grid grid-cols-3 gap-2">
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Nombre</label>
+                  <input type="text" class="input  w-full border mt-2 " name="nombre" [(ngModel)]="alumno.nombre" [ngModelOptions]="{standalone: true}" placeholder="">
+                </div>
+
+              </div>
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Apellido Paterno:</label>
+                  <input type="text" class="input  w-full border mt-2 " name="paterno" [(ngModel)]="alumno.paterno" [ngModelOptions]="{standalone: true}" placeholder="">
+                </div>
+              </div>
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Apellido Materno:</label>
+                  <input type="text" class="input  w-full border mt-2 " name="materno" [(ngModel)]="alumno.materno" [ngModelOptions]="{standalone: true}" placeholder="">
+                </div>
+              </div>
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">ID Matricula</label>
+                  <input type="text" class="input  w-full border mt-2 " name="matricula" [(ngModel)]="alumno.matricula" [ngModelOptions]="{standalone: true}" placeholder="">
+                </div>
+              </div>
+              <!--
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Universidad:</label>
+                  <select class="input  w-full border mt-2 " name="idUniversidad" [(ngModel)]="alumno.idUniversidad" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let universidad of universidades" [ngValue]="universidad.id">{{ universidad.universidad }}</option>
+                  </select>
+                </div>
+              </div>-->
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Facultad:</label>
+                  <select class="input  w-full border mt-2 " name="idFacultad" [(ngModel)]="alumno.id_facultad" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let facultad of facultades" [ngValue]="facultad.id">{{ facultad.nombre}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Carrera:</label>
+                  <select class="input  w-full border mt-2 " name="id_carrera" [(ngModel)]="alumno.id_carrera" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let carrera of carreras" [ngValue]="carrera.id">{{ carrera.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="relative mt-8">
+                <div>
+                  <label style="font-size:19px; color:#FF8800; font-weight: bold;">Plan:</label>
+                  <select class="input  w-full border mt-2 " name="id_plan" [(ngModel)]="alumno.id_plan" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let plan of planes" [ngValue]="plan.id">{{ plan.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <br>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+      <h2 class="text-lg font-medium mr-auto">
+      </h2>
+      <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+        <a routerLink="/alumnos" class="button text-black bg-theme-2 shadow-md mr-2">Cancelar</a>
+        <button type="submit" class="button text-white bg-theme-1 shadow-md mr-2" style="background-color: #FF8300;">Guardar</button>
+      </div>
+    </div>
+
+  </form>
+  <!-- END: FORM -->
+</div>
+<!-- END: Content -->

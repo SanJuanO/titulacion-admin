@@ -1,0 +1,201 @@
+<app-menu></app-menu>
+
+<br>
+<br>
+<br>
+
+<!-- BEGIN: Content -->
+<div class="container" style="font-family:Helvetica;">
+  <div class="cargador" id="carg" style="display:none;"></div>
+
+  <div class=" mt-8 p-5 border-b border-gray-200 dark:border-dark-5">
+    <div class="" style="float: right; ">
+      <a onclick="alert('exportar alumnos')" class="button text-white shadow-md mr-2" style="background-color: #FF8300;">exportar a excel</a>
+    </div>
+    <h2 class="font-medium text-base mr-auto" style="font-size:25px;  font-weight: bold; ">
+      Alumnos
+    </h2>
+  </div>
+  <br>
+
+  <div class="p-5 border-b border-gray-200 dark:border-dark-5">
+
+    <div class="sm:grid grid-cols-3 gap-1">
+
+      <div class="relative">
+        <div class="col-span-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Facultad:</label>
+          <select class="input  w-full border mt-2 " name="id_facultad" [(ngModel)]="id_facultad" [ngModelOptions]="{standalone: true}">
+            <option [ngValue]="0"></option>
+            <option *ngFor="let facultad of facultades" [ngValue]="facultad.id">{{ facultad.nombre }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="col-span-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Carrera:</label>
+          <select class="input  w-full border mt-2 " name="id_carrera" [(ngModel)]="id_carrera" [ngModelOptions]="{standalone: true}">
+            <option [ngValue]="0"></option>
+            <option *ngFor="let carrera of carreras" [ngValue]="carrera.id">{{ carrera.nombre}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="col-span-1">
+          <label style="font-size:19px; color:#FF8800; font-weight: bold;">Plan:</label>
+          <select class="input  w-full border mt-2 " name="id_plan" [(ngModel)]="id_plan" [ngModelOptions]="{standalone: true}">
+            <option [ngValue]="0"></option>
+            <option *ngFor="let plan of planes" [ngValue]="plan.id">{{ plan.nombre }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-2 text-rigth" style="float: right; ">
+        <a (click)="rerender();" class="button text-white shadow-md mr-2" style="background-color: #FF8300;">Filtrar</a>
+      </div>
+    </div>
+  </div>
+    <br>
+
+
+    <!-- BEGIN: Datatable -->
+
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+      <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="tdElement" name="dtElement">
+        <thead>
+          <tr>
+            <th class="border-b-2 whitespace-no-wrap">NOMBRE COMPLETO</th>
+            <th class="border-b-2 text-center whitespace-no-wrap">MATRICULA</th>
+            <!--<th class="border-b-2 text-center whitespace-no-wrap">CAMPUS</th>-->
+            <th class="border-b-2 text-center whitespace-no-wrap">FACULTAD</th>
+            <th class="border-b-2 text-center whitespace-no-wrap">CARRERA</th>
+            <th class="border-b-2 text-center whitespace-no-wrap">PLAN</th>
+            <th class="border-b-2 text-center whitespace-no-wrap">ESTADO</th>
+            <th class="border-b-2 text-center whitespace-no-wrap">ACCIONES</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let alumno of alumnos">
+            <td class="border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="modal" id="delete-modal-preview-{{alumno.id}}">
+                <div class="modal__content">
+                  <div class="p-5 text-center">
+                    <i *ngIf="alumno.activo" data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <i *ngIf="!alumno.activo" data-feather="check-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <div *ngIf="alumno.activo" class="text-3xl mt-5 text-center" style="color: #FF8300; font-size: 28px;">¿Estas seguro de desactivar al alumno?</div>
+                    <div *ngIf="!alumno.activo" class="text-3xl mt-5 text-center" style="color: #FF8300; font-size: 28px;">¿Estas seguro de activar al alumno?</div>
+                  </div>
+                  <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 dark:border-dark-5 dark:text-gray-300 mr-1">
+                      Cancelar
+                    </button>
+                    <button *ngIf="alumno.activo" type="button" class="button w-24 bg-theme-6 text-white" (click)="eliminar(alumno.id)">Desactivar</button>-->
+                    <button *ngIf="!alumno.activo" type="button" class="button w-24 bg-theme-9 text-white" (click)="eliminar(alumno.id)">Activar</button>
+                  </div>
+                </div>
+              </div>
+              <a [routerLink]="['/alumnos/ver', alumno.id]">
+                <div class="font-medium whitespace-no-wrap">{{ alumno.nombre + " " + alumno.paterno }} <span *ngIf="alumno.materno!=null">{{alumno.materno}} </span> </div>
+                <div class="text-gray-600 text-xs whitespace-no-wrap">{{ alumno.carrera }}</div>
+              </a>
+            </td>
+            <td class="border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="font-medium flex sm:justify-center items-center">{{ alumno.matricula }}</div>
+            </td>
+            <!--
+          <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+            <div class="font-medium flex sm:justify-center items-center">{{ alumno.universidad }}</div>
+          </td>-->
+            <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">{{ alumno.facultad }}</td>
+            <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">{{ alumno.carrera }}</td>
+            <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">{{ alumno.nombre_plan }}</td>
+            <td class="w-40 border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div *ngIf="alumno.id_estado==0" class="rounded-md text-center px-1 py-1 mb-2 bg-theme-12 text-white"> PRE REGISTRO </div>
+              <div *ngIf="alumno.id_estado==1" class="rounded-md text-center px-1 py-1 mb-2 text-white" style="background: #FF8800;"> PAGO </div>
+              <div *ngIf="alumno.id_estado==2" class="rounded-md text-center px-1 py-1 mb-2 bg-theme-9 text-white"> CERTIFICADO </div>
+              <div *ngIf="alumno.id_estado==3" class="rounded-md text-center px-1 py-1 mb-2 bg-theme-9 text-white"> TITULADO </div>
+            </td>
+            <td class="border-b w-5" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="flex sm:justify-center items-center">
+                <a class="flex items-center mr-3" [routerLink]="['/alumnos/edit', alumno.id]">
+                  <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Editar
+                </a>
+                <a class="flex items-center text-theme-9" href="javascript:;" (click)="modaleliminar(0)">
+                  <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Cambiar estado
+                </a>
+                <!--
+                <a *ngIf="alumno.activo" class="flex items-center text-theme-6" href="javascript:;" (click)="modaleliminar(alumno.id)">
+                  <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Desactivar
+                </a>
+                <a *ngIf="!alumno.activo" class="flex items-center text-theme-9" href="javascript:;" (click)="modaleliminar(alumno.id)">
+                  <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Activar
+                </a>-->
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+        <!--<tbody *ngIf="alumnos==undefined || alumnos.length == 0">
+          <tr>
+          <td colspan="7" class="no-data-available">sin datos</td>
+        </tr>
+          <tr>
+            <td class="border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="modal" id="delete-modal-preview-0">
+                <div class="modal__content">
+                  <div class="p-5 text-center">
+                    <i data-feather="check-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5 text-center" style="color: #FF8300; font-size: 28px;">¿Estas seguro de cambiar el estado?</div>
+
+                    <select class="input w-9\/12 border mt-2" name="idDocumento" [(ngModel)]="idDocumento">
+                      <option value="1">PRE - REGISTRO</option>
+                      <option value="2">SOLICITADO</option>
+                      <option value="3">ENTREGADO</option>
+                    </select>
+                  </div>
+                  <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 dark:border-dark-5 dark:text-gray-300 mr-1">
+                      Cancelar
+                    </button>
+                    <button type="button" class="button w-24 bg-theme-6 text-white" onclick="alert('Estado actualizado')">cambiar</button>
+                  </div>
+                </div>
+              </div>
+              <a [routerLink]="['/alumnos/ver', 0]">
+                <div class="font-medium whitespace-no-wrap">EDGAR IVAN TORRES PEREZ </div>
+                <div class="text-gray-600 text-xs whitespace-no-wrap">Negocios Internacionales</div>
+              </a>
+            </td>
+            <td class="border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="font-medium flex sm:justify-center items-center">00000000</div>
+            </td>
+            <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="font-medium flex sm:justify-center items-center">Anáhuac México</div>
+            </td>
+            <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">Negocios</td>
+            <td class="text-center border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">LC-NEGI-04</td>
+            <td class="w-40 border-b" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="rounded-md text-center px-1 py-1 mb-2 bg-theme-12 text-white"> PRE REGISTRO </div>
+              <div class="rounded-md text-center px-1 py-1 mb-2 text-white" style="background: #FF8800;"> SOLICITADO </div>
+              <div class="rounded-md text-center px-1 py-1 mb-2 bg-theme-9 text-white"> ENTREGADO </div>
+            </td>
+            <td class="border-b w-5" style="background: rgb(250, 250, 250); font-size:17px;  font-weight: bold; ">
+              <div class="flex sm:justify-center items-center">
+                <a class="flex items-center mr-3" [routerLink]="['/alumnos/edit', 0]">
+                  <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Editar
+                </a>
+                <a class="flex items-center text-theme-9" href="javascript:;" (click)="modaleliminar(0)">
+                  <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Cambiar estado
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>-->
+      </table>
+    </div>
+    <!-- END: Datatable -->
+  </div>
+<!-- END: Content -->

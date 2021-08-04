@@ -1,0 +1,13 @@
+
+.cargador {
+  position: fixed;
+  z-index: 9999;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: url(/../../../assets/images/car2.gif);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  opacity: 1;
+}

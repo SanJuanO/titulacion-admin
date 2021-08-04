@@ -1,0 +1,44 @@
+<app-menu></app-menu>
+<br>
+<br>
+<br>
+
+<div class="container" style="font-family:Helvetica;">
+  <br>
+
+  <div class=" mt-8 p-5 border-b border-gray-200 dark:border-dark-5">
+    <h2 class="font-medium text-base mr-auto" style="font-size:25px;  font-weight: bold; ">
+      Carrera
+    </h2>
+  </div>
+  <br>
+
+  <div class="container pl-5 pr-5">
+    <div class="grid grid-cols-12 gap-6">
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
+        <div class="p-5 pt-1 pb-1">
+          <div class="text-base text-gray-600 mt-1" style="font-size:19px; color:#FF8800; font-weight: bold;">
+            Carrera
+          </div>
+          <div class="text-base font-bold leading-8 mt-1"> {{carrera.nombre}} </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
+        <div class=" p-5 pt-1 pb-1">
+          <div class="text-base text-gray-600 mt-1" style="font-size:19px; color:#FF8800; font-weight: bold;">
+            Descripción
+          </div>
+          <div class="text-base font-bold leading-8 mt-1"> {{carrera.descripcion}} </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<app-planes></app-planes>

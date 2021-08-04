@@ -1,0 +1,109 @@
+<app-menu></app-menu>
+<br>
+<br>
+<br>
+
+<div class="container" style="font-family:Helvetica;">
+
+
+  <div class=" mt-8 p-5 border-b border-gray-200 dark:border-dark-5">
+    <div class="" style="float: right; ">
+      <a routerLink="/facultades/add" class="button text-white shadow-md mr-2" style="background-color: #FF8300;">Agregar</a>
+    </div>
+    <h2 class="font-medium text-base mr-auto" style="font-size:25px;  font-weight: bold; ">
+      Facultades
+    </h2>
+  </div>
+  <br>
+
+  <div class="modal" id="success-modal-preview">
+    <div class="modal__content">
+      <div class="p-5 text-center">
+        <i data-feather="check-circle" class="w-16 h-16 text-theme-9 mx-auto mt-3"></i>
+        <div class="text-3xl mt-5">Muy bien!</div>
+        <div class="text-gray-600 mt-2">Has eliminado una Facultad</div>
+      </div>
+      <div class="px-5 pb-8 text-center"> <button type="button" data-dismiss="modal" class="button w-24 bg-theme-1 text-white">Ok</button> </div>
+    </div>
+  </div>
+  <br>
+
+
+  <div class="modal" id="delete-modal">
+    <div class="modal__content">
+      <div class="p-5 text-center">
+        <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+        <div class="text-3xl mt-5 text-center" style="color: #FF8300; font-size: 28px;">¿Estas seguro de eliminar <br /><br />la Facultad?</div>
+        <!--<div class="text-gray-600 mt-2">Eliminar facultad</div>-->
+      </div>
+      <div class="px-5 pb-8 text-center">
+        <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 dark:border-dark-5 dark:text-gray-300 mr-1">Cancelar</button>
+        <button type="button" (click)="eliminar()" data-dismiss="modal" class="button w-24 bg-theme-6 text-white">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEGIN: Datatable -->
+
+  <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" id="tabla1" style="display: block;">
+    <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead>
+        <tr>
+          <th class="border-b-2 text-center whitespace-no-wrap">ID</th>
+          <th class="border-b-2 text-center whitespace-no-wrap">FACULTAD</th>
+          <th class="border-b-2 text-center whitespace-no-wrap">DESCRIPCIÓN</th>
+          <th class="border-b-2 text-center whitespace-no-wrap">ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="facultades?.length != 0">
+
+        <tr *ngFor="let facultad of facultades">
+
+          <td class="border-b">
+            <a [routerLink]="['/facultades/ver', facultad.id]">
+              <div class="rounded-lg text-center px-1 py-1 mb-2  text-black"> {{facultad.id}}</div>
+            </a>
+          </td>
+
+          <td class="border-b">
+            <a [routerLink]="['/facultades/ver', facultad.id]">
+              <div class="rounded-lg text-center px-1 py-1 mb-2  text-black">{{facultad.nombre}}</div>
+            </a>
+          </td>
+
+          <td class="border-b">
+            <a [routerLink]="['/facultades/ver', facultad.id]">
+              <div class="rounded-lg text-center px-1 py-1 mb-2  text-black">{{facultad.descripcion}}</div>
+            </a>
+          </td>
+
+          <td class="border-b w-5">
+            <div class="flex sm:justify-center items-center">
+              <a class="flex items-center mr-3" [routerLink]="['/facultades/edit', facultad.id]"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Editar </a>
+              <a class="flex items-center text-theme-6" (click)="modaleliminar(facultad)" href="javascript:void(0)"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Eliminar </a>
+            </div>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+      <tbody *ngIf="facultades?.length == 0">
+
+        <tr>
+          <td colspan="4">
+            <h3 class="text-center">Sin datos</h3>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+  <!-- END: Datatable -->
+</div>
+<!-- END: Content -->
